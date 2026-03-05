@@ -1,0 +1,30 @@
+name: Deploy to AWS
+on:
+  push:
+    branches: [ main ] #메인 브랜치 코드 올라오면 실행
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ubuntu
+          key: ${{ secrets.KEY }}
+          script: |
+            # 서버에 프로젝트 폴더가 없으면 새로 가져오고, 있으면 들어갑니다.
+            if [ ! -d "~/ai-agent" ]; then
+              git clone https://github.com/rogimun/ai-agent.git ~/ai-agent
+            fi
+            cd ~/ai-agent
+
+            # GitHub의 최신 코드를 서버로 당겨옵니다.
+            git pull origin main
+
+            # 배포 성공 확인 메시지 출력
+            echo "Successfully deployed the latest code to AWS EC2!"
