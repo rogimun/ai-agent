@@ -1,18 +1,31 @@
 version: '3.8'
 
 services:
+  # MCP 서버 설정
+  mcp-server:
+    build:
+      context: ./mcp_server   
+      dockerfile: Dockerfile 
+    container_name: mcp-server       
+    restart: always
+    env_file:
+      - .env
+
   # 메인 AI 앱 설정
   ai-app:
     build:
       context: .
       dockerfile: Dockerfile 
+    container_name: ai-app      
+    restart: always
+    # 외부에서 8000번 포트로 접속 허용
+    depends_on:
+      - mcp-server  # MCP가 뜰 때까지 기다림
+    env_file:
+      - .env
     ports:
-      - "8000:8000"           # 외부에서 8000번 포트로 접속 허용
-    restart: always
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./db:/app/db
 
-  # MCP 서버 설정
-  mcp-server:
-    build:
-      context: ./mcp_server   
-      dockerfile: Dockerfile  
-    restart: always
