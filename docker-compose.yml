@@ -30,4 +30,3 @@ services:
       - ./data:/app/data
       - ./db:/app/db
       
-
