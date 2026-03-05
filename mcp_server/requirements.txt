@@ -1,0 +1,21 @@
+# [Core Framework]
+fastapi
+uvicorn[standard]
+python-dotenv
+
+# [AI & LangChain]
+langchain-openai
+langgraph
+langchain-mcp-adapters
+
+# [MCP Server & Client]
+mcp
+fastmcp
+
+# [Tools & Utilities]
+httpx
+beautifulsoup4
+feedparser
+geopy
+jinja2
+python-multipart
