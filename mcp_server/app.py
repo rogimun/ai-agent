@@ -1,7 +1,9 @@
+from fastapi import FastAPI
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
 
 mcp = FastMCP("AI-Tools")
+app = FastAPI()
 
 # 1. Scraper
 @mcp.tool()
@@ -58,6 +60,8 @@ def retrieve_knowledge(query: str) -> str:
     질문(query)을 넣으면 관련 문구들을 반환합니다.
     """
     return search.retrieve_knowledge(query)
+
+app.mount("/mcp", mcp.streamable_http_app())
 
 if __name__ == "__main__":
     mcp.run(transport="streamable-http")
