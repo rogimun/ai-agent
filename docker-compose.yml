@@ -17,7 +17,7 @@ services:
   ai-app:
     build:
       context: .
-      dockerfile: Dockerfile 
+      dockerfile: ./web/Dockerfile 
     container_name: ai-app      
     restart: always
 
