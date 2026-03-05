@@ -5,6 +5,7 @@ python-dotenv
 
 # [AI & LangChain]
 langchain-openai
+langchain-community
 langgraph
 langchain-mcp-adapters
 
@@ -19,3 +20,11 @@ feedparser
 geopy
 jinja2
 python-multipart
+
+# PDF 로딩 및 문서 분할 관련
+pypdf
+langchain-text-splitters
+
+# 벡터 DB 및 임베딩 관련 (에러 해결 핵심)
+chromadb
+langchain-chroma
