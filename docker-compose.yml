@@ -18,7 +18,8 @@ services:
       dockerfile: Dockerfile 
     container_name: ai-app      
     restart: always
-    # 외부에서 8000번 포트로 접속 허용
+
+    # 외부에서 8001번 포트로 접속 허용
     depends_on:
       - mcp-server  # MCP가 뜰 때까지 기다림
     env_file:
