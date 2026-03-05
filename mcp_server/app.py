@@ -60,9 +60,6 @@ def retrieve_knowledge(query: str) -> str:
     return search.retrieve_knowledge(query)
 
 if __name__ == "__main__":
-    import os
-    os.environ["MCP_HOST"] = "0.0.0.0"
-    os.environ["MCP_PORT"] = "8000"
     mcp.run(transport="streamable-http")
 
     
