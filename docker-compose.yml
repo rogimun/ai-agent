@@ -10,6 +10,8 @@ services:
     restart: always
     env_file:
       - .env
+    ports:
+      - "8000:8000"      
 
   # 메인 AI 앱 설정
   ai-app:
