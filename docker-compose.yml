@@ -12,11 +12,6 @@ services:
       - .env
     ports:
       - "8000:8000"
-    environment:
-      - HOST=0.0.0.0
-      - PORT=8000
-      - UVICORN_HOST=0.0.0.0
-      - UVICORN_PORT=8000            
 
   # 메인 AI 앱 설정
   ai-app:

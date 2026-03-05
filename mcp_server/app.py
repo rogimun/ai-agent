@@ -60,6 +60,7 @@ def retrieve_knowledge(query: str) -> str:
     return search.retrieve_knowledge(query)
 
 if __name__ == "__main__":
-    mcp.run(transport="streamable-http")
+    import uvicorn
+    uvicorn.run(mcp.app, host="0.0.0.0", port=8000)
 
     
