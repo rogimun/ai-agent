@@ -4,8 +4,8 @@ services:
   # MCP 서버 설정
   mcp-server:
     build:
-      context: ./mcp_server   
-      dockerfile: Dockerfile 
+      context: . 
+      dockerfile: ./mcp_server/Dockerfile 
     container_name: mcp-server       
     restart: always
     env_file:
