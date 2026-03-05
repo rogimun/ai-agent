@@ -1,9 +1,7 @@
-from fastapi import FastAPI
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
 
 mcp = FastMCP("AI-Tools")
-app = FastAPI()
 
 # 1. Scraper
 @mcp.tool()
@@ -61,10 +59,5 @@ def retrieve_knowledge(query: str) -> str:
     """
     return search.retrieve_knowledge(query)
 
-app.mount("/mcp", mcp.streamable_http_app())
-
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-
-    
+    mcp.run(transport="streamable-http")
