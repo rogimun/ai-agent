@@ -28,3 +28,4 @@ jobs:
 
             # 배포 성공 확인 메시지 출력
             echo "Successfully deployed the latest code to AWS EC2!"
+            
