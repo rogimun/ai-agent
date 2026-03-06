@@ -1,11 +1,17 @@
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 mcp = FastMCP("AI-Tools")
 app = mcp.streamable_http_app()
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # 1. Scraper
 @mcp.tool()
 def scrape_page_text(url: str) -> str:
