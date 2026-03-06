@@ -1,9 +1,5 @@
 version: '3.8'
 
-networks:
-  mcp-network:
-    driver: bridge
-
 services:
   # 데이터 벡터화
   ingest-agent:
@@ -20,13 +16,6 @@ services:
 
   # MCP 서버 설정
   mcp-server:
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/mcp"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    networks:
-      - mcp-network      
     build:
       context: . 
       dockerfile: ./mcp_server/Dockerfile 
@@ -39,8 +28,6 @@ services:
 
   # 메인 AI 앱 설정
   ai-app:
-    networks:
-      - mcp-network  
     build:
       context: .
       dockerfile: ./web/Dockerfile 
@@ -50,9 +37,7 @@ services:
     # 외부에서 8001번 포트로 접속 허용
     # MCP가 뜰 때까지 기다림
     depends_on:
-      mcp-server:
-        condition: service_healthy 
-
+      mcp-server
     env_file:
       - .env
     ports:
