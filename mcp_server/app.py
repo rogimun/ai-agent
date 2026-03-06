@@ -2,7 +2,7 @@ from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
 import uvicorn
 
-mcp = FastMCP("AI-Tools")
+mcp = FastMCP("AI-Tools", allowed_hosts=["*", "mcp-server", "localhost", "127.0.0.1"])
 app = mcp.streamable_http_app()
 
 # 1. Scraper
