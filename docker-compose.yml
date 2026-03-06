@@ -23,8 +23,16 @@ services:
     restart: always
     env_file:
       - .env
-    ports:
-      - "8000:8000"
+
+  # nginx 프록시
+  nginx-proxy:
+      image: nginx:alpine
+      container_name: nginx-proxy
+      restart: always
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      depends_on:
+        - mcp-server
 
   # 메인 AI 앱 설정
   ai-app:
@@ -37,9 +45,8 @@ services:
     # 외부에서 8001번 포트로 접속 허용
     # MCP가 뜰 때까지 기다림
     depends_on:
-      - mcp-server
-    extra_hosts:
-      - "host.docker.internal:host-gateway"      
+      - nginx-proxy
+
     env_file:
       - .env
     ports:
