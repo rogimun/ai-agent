@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  # 데이터 벡터화
+  ingest-agent:
+    build:
+      context: .
+      dockerfile: ./agent/Dockerfile
+    container_name: ingest-agente
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./db:/app/db
+    profiles: ["tools"]
+
   # MCP 서버 설정
   mcp-server:
     build:
@@ -28,7 +41,5 @@ services:
       - .env
     ports:
       - "8001:8001"
-    volumes:
-      - ./data:/app/data
-      - ./db:/app/db
+
       
