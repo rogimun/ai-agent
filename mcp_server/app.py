@@ -1,9 +1,11 @@
+from fastapi import FastAPI
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
 import uvicorn
 
 mcp = FastMCP("AI-Tools")
-app = mcp.streamable_http_app()
+app = FastAPI()
+app.mount("/mcp", mcp.streamable_http_app())
 
 # 1. Scraper
 @mcp.tool()
