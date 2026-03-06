@@ -69,5 +69,12 @@ def retrieve_knowledge(query: str) -> str:
     """
     return search.retrieve_knowledge(query)
 
+@app.on_event("startup")
+async def startup_event():
+    print("Available routes:")
+    for route in app.routes:
+        print(f"Path: {route.path}, Name: {route.name}")
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
