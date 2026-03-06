@@ -12,8 +12,6 @@ services:
       - .env
     ports:
       - "8000:8000"
-    environment:
-      - ALLOWED_HOSTS=*      
 
   # 메인 AI 앱 설정
   ai-app:
