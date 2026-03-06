@@ -1,9 +1,12 @@
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 import uvicorn
 
-mcp = FastMCP("AI-Tools", host="0.0.0.0")
-app = mcp.streamable_http_app(
+mcp = FastMCP("AI-Tools")
+app = mcp.streamable_http_app()
+app.add_middleware(
+    TrustedHostMiddleware,
     allowed_hosts=["*"]
 )
 
