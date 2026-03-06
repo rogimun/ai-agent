@@ -38,6 +38,8 @@ services:
     # MCP가 뜰 때까지 기다림
     depends_on:
       - mcp-server
+    extra_hosts:
+      - "host.docker.internal:host-gateway"      
     env_file:
       - .env
     ports:
