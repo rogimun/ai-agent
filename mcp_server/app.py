@@ -5,7 +5,7 @@ import uvicorn
 
 mcp = FastMCP("AI-Tools")
 app = mcp.streamable_http_app()
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*", "localhost", "mcp-server"])
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*", "localhost", "mcp-server", "nginx-proxy"])
 
 # 1. Scraper
 @mcp.tool()
