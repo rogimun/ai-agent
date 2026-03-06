@@ -1,5 +1,5 @@
 from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from shared.config import settings
 
 embeddings = OpenAIEmbeddings(api_key=settings.OPENAI_API_KEY)
