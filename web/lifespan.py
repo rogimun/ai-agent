@@ -36,7 +36,7 @@ async def lifespan(app: FastAPI):
                     print("에이전트 설정 완료. 애플리케이션이 준비되었습니다.")
                     connected = True
                     yield
-                    break
+                    return
         except (Exception, BaseExceptionGroup) as e:
             print(f"[{i+1}/{max_retries}] 연결 실패: {e}")
             if i < max_retries - 1:
