@@ -5,7 +5,6 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 mcp = FastMCP("AI-Tools")
 app = mcp.streamable_http_app()
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
 
 # 1. Scraper
 @mcp.tool()
