@@ -7,7 +7,7 @@ from shared.config import settings
 mcp = FastMCP("AI-Tools")
 app = mcp.streamable_http_app()
 
-allowed_hosts = settings("ALLOWED_HOSTS").split(",") 
+allowed_hosts = settings.ALLOWED_HOSTS.split(",") 
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
 
 # 1. Scraper
