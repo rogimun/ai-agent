@@ -1,9 +1,15 @@
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 import uvicorn
+from shared.config import settings
 
 mcp = FastMCP("AI-Tools")
 app = mcp.streamable_http_app()
+
+allowed_hosts = settings("ALLOWED_HOSTS").split(",") 
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
+
 # 1. Scraper
 @mcp.tool()
 def scrape_page_text(url: str) -> str:
@@ -61,4 +67,4 @@ def retrieve_knowledge(query: str) -> str:
     return search.retrieve_knowledge(query)
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, proxy_headers=True, forwarded_allow_ips="*")
