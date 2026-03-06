@@ -37,7 +37,7 @@ services:
     # 외부에서 8001번 포트로 접속 허용
     # MCP가 뜰 때까지 기다림
     depends_on:
-      mcp-server
+      - mcp-server
     env_file:
       - .env
     ports:
