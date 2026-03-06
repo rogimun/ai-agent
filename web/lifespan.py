@@ -37,12 +37,13 @@ async def lifespan(app: FastAPI):
                     connected = True
                     yield
                     break
-        except Exception as e:
+        except (Exception, BaseExceptionGroup) as e:
+            print(f"[{i+1}/{max_retries}] 연결 실패: {e}")
             if i < max_retries - 1:
                 print(f"{retry_delay}초 후 다시 시도합니다...")
                 await asyncio.sleep(retry_delay)
             else:
-                print("최대 재시도 횟수 초과. 서버를 시작할 수 없습니다.")
+                print("최대 재시도 횟수 초과.")
                 raise e
             
     if connected:
