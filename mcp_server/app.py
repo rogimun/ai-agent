@@ -4,15 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 mcp = FastMCP("AI-Tools")
-app = mcp.streamable_http_app()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 # 1. Scraper
 @mcp.tool()
 def scrape_page_text(url: str) -> str:
@@ -68,6 +60,16 @@ def retrieve_knowledge(query: str) -> str:
     질문(query)을 넣으면 관련 문구들을 반환합니다.
     """
     return search.retrieve_knowledge(query)
+
+app = mcp.streamable_http_app()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("startup")
 async def startup_event():
