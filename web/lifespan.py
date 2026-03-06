@@ -21,7 +21,7 @@ async def lifespan(app: FastAPI):
 
     for i in range(max_retries):
         try:
-            async with streamablehttp_client(settings.MCP_SERVER_URL) as (read, write, _):
+            async with streamablehttp_client("http://mcp-server:8000/sse") as (read, write, _):
                 async with ClientSession(read, write) as session:
                     await session.initialize()
                     tools = await load_mcp_tools(session)
