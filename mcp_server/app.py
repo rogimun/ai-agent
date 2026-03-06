@@ -4,7 +4,6 @@ import uvicorn
 
 mcp = FastMCP("AI-Tools")
 app = mcp.streamable_http_app()
-
 # 1. Scraper
 @mcp.tool()
 def scrape_page_text(url: str) -> str:
