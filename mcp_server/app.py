@@ -1,6 +1,5 @@
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
-from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 mcp = FastMCP("AI-Tools")
@@ -62,14 +61,6 @@ def retrieve_knowledge(query: str) -> str:
     return search.retrieve_knowledge(query)
 
 app = mcp.streamable_http_app()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
