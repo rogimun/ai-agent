@@ -1,4 +1,3 @@
-from fastapi import FastAPI
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
 from fastapi.middleware.cors import CORSMiddleware
@@ -62,9 +61,7 @@ def retrieve_knowledge(query: str) -> str:
     """
     return search.retrieve_knowledge(query)
 
-mcp_app = mcp.streamable_http_app()
-app = FastAPI()
-app.mount("/", mcp_app)
+app = mcp.streamable_http_app()
 
 app.add_middleware(
     CORSMiddleware,
