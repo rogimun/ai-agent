@@ -1,6 +1,7 @@
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
 import uvicorn
+from fastapi.routing import APIRoute
 
 mcp = FastMCP("AI-Tools")
 
@@ -61,6 +62,10 @@ def retrieve_knowledge(query: str) -> str:
     return search.retrieve_knowledge(query)
 
 app = mcp.streamable_http_app()
+
+for route in app.routes:
+    if isinstance(route, APIRoute):
+        route.redirect_slashes = False
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=False)
