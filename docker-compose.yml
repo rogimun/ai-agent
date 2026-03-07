@@ -23,6 +23,8 @@ services:
     restart: always
     env_file:
       - .env
+    ports:
+      - "8000:8000"      
 
   # nginx 프록시
   nginx-proxy:
