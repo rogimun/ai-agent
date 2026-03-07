@@ -64,7 +64,7 @@ def retrieve_knowledge(query: str) -> str:
 
 mcp_app = mcp.streamable_http_app()
 app = FastAPI()
-app.mount("/mcp", mcp_app)
+app.mount("/", mcp_app)
 
 app.add_middleware(
     CORSMiddleware,
