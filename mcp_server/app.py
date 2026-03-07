@@ -1,3 +1,4 @@
+from fastapi import FastAPI
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
 from fastapi.middleware.cors import CORSMiddleware
@@ -61,7 +62,9 @@ def retrieve_knowledge(query: str) -> str:
     """
     return search.retrieve_knowledge(query)
 
-app = mcp.streamable_http_app()
+mcp_app = mcp.streamable_http_app()
+app = FastAPI()
+app.mount("/mcp", mcp_app)
 
 app.add_middleware(
     CORSMiddleware,
@@ -70,13 +73,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-@app.on_event("startup")
-async def startup_event():
-    print("Available routes:")
-    for route in app.routes:
-        print(f"Path: {route.path}, Name: {route.name}")
-
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
