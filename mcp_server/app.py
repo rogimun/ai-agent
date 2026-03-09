@@ -5,11 +5,10 @@ import uvicorn
 
 security_settings = TransportSecuritySettings(
     allowed_hosts=[
-        "localhost:*",
-        "127.0.0.1:*",
-        "mcp-server:*",    # 도커 컨테이너 이름 허용
-        "nginx-proxy:*",   # Nginx 프록시 이름 허용
-        "0.0.0.0:*"        # 전체 허용
+        "*",
+        "localhost",
+        "nginx-proxy",
+        "mcp-server"
     ]
 )
 
