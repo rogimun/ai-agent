@@ -72,8 +72,7 @@ app.add_middleware(
         "mcp-server",
         "mcp-server:8000",
         "nginx-proxy",
-        # 개발 중이면 임시로 모든 호스트 허용:
-        # "*"
+        "*"
     ],
 )
 
