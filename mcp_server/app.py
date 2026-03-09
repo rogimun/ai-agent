@@ -13,7 +13,7 @@ security_settings = TransportSecuritySettings(
     ]
 )
 
-mcp = FastMCP("AI-Tools", ransport_security=security_settings)
+mcp = FastMCP("AI-Tools", transport_security=security_settings)
 # 1. Scraper
 @mcp.tool()
 def scrape_page_text(url: str) -> str:
