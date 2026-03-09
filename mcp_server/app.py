@@ -1,6 +1,8 @@
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
 from starlette.middleware.trustedhost import TrustedHostMiddleware
+from starlette.applications import Starlette
+from starlette.routing import Mount
 import uvicorn
 
 mcp = FastMCP("AI-Tools")
@@ -63,8 +65,13 @@ def retrieve_knowledge(query: str) -> str:
 
 app = mcp.streamable_http_app()
 
-app.router.redirect_slashes = False
-app.add_middleware(
+root_app = Starlette(
+    routes=[
+        Mount("/", app)
+    ]
+)
+
+root_app.add_middleware(
     TrustedHostMiddleware,
     allowed_hosts=["*"]
 )
