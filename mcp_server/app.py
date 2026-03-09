@@ -63,6 +63,7 @@ def retrieve_knowledge(query: str) -> str:
 
 app = mcp.streamable_http_app()
 
+app.router.redirect_slashes = False
 app.add_middleware(
     TrustedHostMiddleware,
     allowed_hosts=["*"]
