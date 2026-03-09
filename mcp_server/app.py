@@ -1,5 +1,6 @@
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 import uvicorn
 
 mcp = FastMCP(
@@ -62,14 +63,23 @@ def retrieve_knowledge(query: str) -> str:
     return search.retrieve_knowledge(query)
 
 app = mcp.streamable_http_app()
-app.router.redirect_slashes = False
+
+app.add_middleware(
+    TrustedHostMiddleware,
+    allowed_hosts=[
+        "localhost",
+        "127.0.0.1",
+        "mcp-server",
+        "mcp-server:8000",
+        "nginx-proxy",
+        # 개발 중이면 임시로 모든 호스트 허용:
+        # "*"
+    ],
+)
 
 if __name__ == "__main__":
     uvicorn.run(
         app,
         host="0.0.0.0",
         port=8000,
-        reload=False,
-        proxy_headers=True,
-        forwarded_allow_ips="*"        
     )
