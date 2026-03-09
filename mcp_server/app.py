@@ -2,7 +2,7 @@ from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
 import uvicorn
 
-mcp = FastMCP("AI-Tools", allowed_hosts=["*"])
+mcp = FastMCP("AI-Tools")
 
 # 1. Scraper
 @mcp.tool()
