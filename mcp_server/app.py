@@ -61,6 +61,7 @@ def retrieve_knowledge(query: str) -> str:
     return search.retrieve_knowledge(query)
 
 app = mcp.streamable_http_app()
+app.router.redirect_slashes = False
 
 if __name__ == "__main__":
     uvicorn.run(
