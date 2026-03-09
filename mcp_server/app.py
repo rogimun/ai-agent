@@ -1,5 +1,6 @@
 from mcp.server.fastmcp import FastMCP
 from mcp_server.tools import weather, news, sports, scraper, info, search
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 import uvicorn
 
 mcp = FastMCP("AI-Tools")
@@ -61,6 +62,11 @@ def retrieve_knowledge(query: str) -> str:
     return search.retrieve_knowledge(query)
 
 app = mcp.streamable_http_app()
+
+app.add_middleware(
+    TrustedHostMiddleware,
+    allowed_hosts=["*"]
+)
 
 if __name__ == "__main__":
     uvicorn.run(
