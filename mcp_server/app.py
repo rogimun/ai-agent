@@ -1,8 +1,19 @@
 from mcp.server.fastmcp import FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
 from mcp_server.tools import weather, news, sports, scraper, info, search
 import uvicorn
 
-mcp = FastMCP("AI-Tools")
+security_settings = TransportSecuritySettings(
+    allowed_hosts=[
+        "localhost:*",
+        "127.0.0.1:*",
+        "mcp-server:*",    # 도커 컨테이너 이름 허용
+        "nginx-proxy:*",   # Nginx 프록시 이름 허용
+        "0.0.0.0:*"        # 전체 허용
+    ]
+)
+
+mcp = FastMCP("AI-Tools", ransport_security=security_settings)
 # 1. Scraper
 @mcp.tool()
 def scrape_page_text(url: str) -> str:
