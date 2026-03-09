@@ -3,14 +3,7 @@ from mcp_server.tools import weather, news, sports, scraper, info, search
 import uvicorn
 
 mcp = FastMCP(
-    "AI-Tools",
-    allowed_hosts=[
-        "localhost",
-        "127.0.0.1",
-        "mcp-server",
-        "mcp-server:8000",
-        "nginx-proxy"
-    ]
+    "AI-Tools"
 )
 # 1. Scraper
 @mcp.tool()
