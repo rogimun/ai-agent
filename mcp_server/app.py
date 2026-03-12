@@ -1,14 +1,17 @@
 from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
-from mcp_server.tools import weather, news, sports, scraper, info, search
+from mcp_server.tools import weather, news, sports, scraper, info, search, web_search
 import uvicorn
 
 security_settings = TransportSecuritySettings(
     allowed_hosts=[
         "*",
         "localhost",
+        "localhost:8000",
         "nginx-proxy",
-        "mcp-server"
+        "mcp-server",
+        "127.0.0.1:8000",
+        "127.0.0.1"
     ]
 )
 
@@ -64,10 +67,18 @@ def brief_today() -> str:
 @mcp.tool()
 def retrieve_knowledge(query: str) -> str:
     """
-    회사의 취업 규칙, 복지, 개인정보보호 지침 등 내부 문서에서 답을 찾을 때 사용합니다.
+    개인정보보호 지침 내부 문서에서 답을 찾을 때 사용합니다.
     질문(query)을 넣으면 관련 문구들을 반환합니다.
     """
     return search.retrieve_knowledge(query)
+
+@mcp.tool()
+def get_web(query: str) -> str:
+    """
+        인터넷에서 최신 정보를 검색합니다.
+    """
+    return web_search.get_web(query)
+
 
 app = mcp.streamable_http_app()
 

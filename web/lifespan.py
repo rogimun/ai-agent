@@ -14,7 +14,6 @@ from agent.workflow import create_agent_workflow
 async def lifespan(app: FastAPI):
     """FastAPI 애플리케이션의 생명주기 동안 MCP 연결 및 에이전트 설정을 관리합니다."""
     print("애플리케이션 시작: MCP 서버에 연결하고 에이전트를 설정합니다...")
-    print(f"DEBUG: MCP_SERVER_URL is -> {settings.MCP_SERVER_URL}")
     max_retries = 5
     retry_delay = 3    
     connected = False

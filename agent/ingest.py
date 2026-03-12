@@ -18,7 +18,10 @@ def vectorize_documents():
     splits = text_splitter.split_documents(docs)
     print(f"문서를 {len(splits)}개의 조각으로 나누었습니다.")
 
-    embeddings = OpenAIEmbeddings(api_key=settings.OPENAI_API_KEY)
+    embeddings = OpenAIEmbeddings(
+            model=settings.EMBEDDING_MODEL,
+            api_key=settings.OPENAI_API_KEY,
+        )
     
     vector_db = Chroma.from_documents(
         documents=splits,
